@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+uploads/               # if you create an 'uploads' folder later
+tmp_*                  # any temp files we generate
+chroma_db/            # ChromaDB vector store directory
+faiss.index           # FAISS index file
+faiss_metadata.json   # FAISS metadata file 

@@ -1,0 +1,65 @@
+[
+  {
+    "chunk_id": 1,
+    "text": "SFWRENG 2AA4 – W23 – A1 \nPage 1 of 5 \nSFWRENG 2AA4 \nAssignment A1: Maze Runner \n \nLEARNING OBJECTIVES \nAt the end of this assignment, students should: \n• \nKnow and understand: \no \nHow to break down a specification into features \no \nThe difference between a development task and a business feature \no \nThe role of version control and build management systems in software development \n• \nBe able to: \no \nSlice a business specification to support incremental and iterative delivery \no \nUse Git on their computer as a version control system to support such delivery \no \nManage dependencies and run their software using Maven \nPREAMBLE \nTECHNICAL ENVIRONMENT \nWe assume you can access a shell environment with OpenJDK (21), Maven and Git available. STARTING CODEBASE \n• \nUse the following codebase for your work: https://github.com/ssm-lab/A1-Template. • \nFor the repository and work in your own repo. • \nSubmit your work by creating a tag on GitHub. Your will be graded based on the tag you \ncreate. Therefore, the tag must not be created before the deadline. DELIVERABLES \nThis assignment expects two (2) deliverables: \n1. Your code. a. Your code is expected to be tagged in your repository. Therefore, you should \ni. share your repo’s URL with your TA if your repo is public; or invite your TA \nto your repo as a collaborator if your repo is private; \nii. release your MVP in tag mvp by Jan 24 (Friday) 11:59:59 PM ET; \niii. release your final product in tag final by Feb 3 (Monday) 11:59:59 PM ET. iv. Tags created after the assignments’ respective deadlines are considered late \nand will not be graded. b. Code that does not compile through Maven is not considered as delivered \n2. A PDF report named a1-your_mac_id.pdf, containing the answers to the questions asked in this \nassignment description. a.",
+    "percent": 15.84,
+    "page": 1,
+    "chapter": null
+  },
+  {
+    "chunk_id": 2,
+    "text": "This report will be delivered on Avenue. b. You can use any tool to write your report (e.g., LaTeX, OpenOffice, Word, …), as long \nas it is delivered as a PDF on Avenue by the deadline. c. \nPage limit: 3-4 pages.",
+    "percent": 18.01,
+    "page": 1,
+    "chapter": null
+  },
+  {
+    "chunk_id": 3,
+    "text": "McMaster University – Faculty of Engineering – Department of Computing and Software \nAssignment A1 (p. 2/5) \nDeliverables that do not meet the constraints (e.g., bad file name, wrong length, delivered not \nwhere it’s supposed to be, not at the time it is supposed to be, code that does not compile) will \nnot be graded. BUSINESS LOGIC SPECIFICATION \nYou have to develop a program to explore a maze, finding a path from an entry point to an exit one. • \nThe maze is stored in a text file, with ‘#’ representing walls and ‘␣‘ (empty space) representing \npassages. • \nYou’ll find examples of such mazes in the provided starter code (directory examples). You can \nalso use the Maze Generator (see Avenue, Repository section) to generate others. • \nThe Maze is surrounded by walls on its four borders, except for its entry/exit points. • \nEntry and exit points are always located on the East and West border. • \nThe maze is not directed. As such, exit and entry can be interchanged. • \nAt the beginning of your exploration, you’re located on the entry tile, facing the opposite side \n(e.g., if entering by the eastern entry, you’re facing West). • \nYour job is to generate a sequence of instructions to reach the opposite exit (i.e., a “path”): \no \n‘F’ means ‘move forward’ according to your current direction \no \n‘R’ means ‘turn right’ (does not move, just change direction), and ‘L’ means ‘turn left’. • \nA canonical path contains only F, R and L symbols  \n• \nA factorized path squashes together similar instructions (i.e., FFF = 3F, LL = 2L).",
+    "percent": 32.1,
+    "page": 2,
+    "chapter": null
+  },
+  {
+    "chunk_id": 4,
+    "text": "• \nSpaces are ignored in the instruction sequence (only for readability: FFLFF = FF L FF) \n• \nYour program must take as input a maze (-i flag) and print the path on the standard output. o \nFor this assignment, your path does not have to be the shortest one (wait for A3). • \nYour program can take a path as input and verify if it’s a legit one, with the -p flag. o \nCalling with -i maze.txt -p FFFF check if the path FFFF is legit for the maze.txt file. EXAMPLE \nConsider the following maze. Entering on the Western point, a path (represented on the right-hand side) is: \n• \nCanonical form:   \nF L FFFFF R FF R FF L FFFFFF R FFFF L F \n• \nFactorized form:  \nF L 5F R 2F R 2F L 6F R 4F L F \nEXPLORING A MAZE \nThere are numerous algorithms to explore mazes that require knowledge of graph theory. You don’t \nhave such a background for now, so we’ll use a simple technique. Put your right hand on the right wall, \nand… walk, following the right wall. As long as your hand always touches the wall, you’re guaranteed \nto find the exit (but that will not be the shortest path).",
+    "percent": 43.06,
+    "page": 2,
+    "chapter": null
+  },
+  {
+    "chunk_id": 5,
+    "text": "McMaster University – Faculty of Engineering – Department of Computing and Software \nAssignment A1 (p. 3/5) \nPLANNING \nFollow an iterative and incremental approach to develop this project. Each week corresponds to an \niteration, and you should have finished the two steps scheduled by the end of each week. During a \ngiven week, you will develop your product incrementally (feature by feature). • \nWeek #1:  \no \nStep 1: Introduce a new dependency and a logging mechanism \no \nStep 2: Set up your walking skeleton  \n• \nWeek #2:  \no \nStep 3: Identify features \no \nStep 4: Minimal and viable product \n• \nWeek #3:   \no \nStep 5: Algorithm Polymorphism \nSTEP #1: INTRODUCE A NEW DEPENDENCY \nThe starting code base contains calls to System.out.println(), and assumes the maze is always passed as \nthe first argument. This is rather suboptimal. Your first job is to: \n1. Edit your POM (the pom.xml file used by Maven) to change the artifactID tag  \na. Use your MacID instead of the placeholder. Mine would be a0-mossers. 2. Edit the provided starter code so that instead of assuming the provided maze is the first \nargument, it uses a -i flag parsed through Apache CLI. 3. Get rid of the irrelevant System.out.println() instructions and replace them by calls to a logger (at \nthe right level: info, trace or error for example). 4. Create a tag t01 associated with this new version of your code, and push it to GitHub \nQuestions to be addressed in your report: \n• \nWhy is it preferable to use libraries such as Apache CLI or Log4J to support things like parsing \nthe command line or printing log statements instead of writing code from scratch? • \nWhat are the advantages/inconveniences of using a logging approach?",
+    "percent": 58.26,
+    "page": 3,
+    "chapter": null
+  },
+  {
+    "chunk_id": 6,
+    "text": "STEP #2: SETTING UP YOUR WALKING SKELETON \nThe starter code is simple: just a static main and no code organization at all. 1. Identify the object abstractions you need to support the exploration. 2. Create the walking skeleton that will support these abstractions. Questions to be addressed in your report: \n• \nHow did you identify these abstractions? • \nWhat makes you think they are the right ones? Justify your design choices. STEP #3: IDENTIFY FEATURES \n1. Create a Kanban board associated with your project on GitHub \na. Three columns: To do, In progress, Done. b. Three issue labels: Feature, Refactor, Bug Fix",
+    "percent": 63.67,
+    "page": 3,
+    "chapter": null
+  },
+  {
+    "chunk_id": 7,
+    "text": "McMaster University – Faculty of Engineering – Department of Computing and Software \nAssignment A1 (p. 4/5) \n2. Identify the features that can be used to decompose the business logic description. a. This can be done by thinking in terms of “What kind of maze are we exploring?”. ▪ \nWhat would be the simplest maze to explore? ▪ \nHow can we complexify this maze? b. Also, think in terms of utility features: \n▪ \nHow do you identify the entry and exit points? ▪ \nHow to squash instructions in order to factorize a path? 3. Update your Kanban board to reflect these features \na. Keep in mind that a feature is something visible to the end user. 4. Plan your Minimal Viable Product as a milestone \na. Create the milestone and add the associated feature to it. 5. Plan your final product as a milestone \nQuestions to be addressed in your report: \n• \nHow did you identify these features? • \nHow will you ensure that they model visible value for the end user? STEP #4: MINIMAL AND VIABLE PRODUCT \nNow that we have a plan, we can start coding it! 1. Code your MVP, and only your MVP. a. Use multiple commits, and associate them with the features you’ve identified on your \nKanban board \n2. Release your code in the mvp tag of your repo. Deadline: January 24 (Fri) 11:59:59 PM ET. 3. Now that your MVP is ready, you can start adding features related to the business logic. Questions to be addressed in your report: \n• \nWhat made your MVP viable? Justify why your choices make your mvp release a viable one. • \nWhat made your MVP minimal? Justify why this version is minimal. STEP #5: ALGORITHM POLYMORPHISM \nNow that we have the MVP, we can start implementing the business logic.",
+    "percent": 79.56,
+    "page": 4,
+    "chapter": null
+  },
+  {
+    "chunk_id": 8,
+    "text": "1. Implement the Right-Hand exploration to compute the path in your program. 2. Keep in mind that we might have to improve this later with fancy algorithms. Thus, we should \nprepare our code to be able to accommodate these changes. This is an opportunity to refactor \nyour code, to consider that upcoming development will add new algorithms. 3. Your code must output on stdout the path’s factorized form, eventually. 4. Release your code in the final tag of your repo. Deadline: February 3 (Mon) 11:59:59 PM ET. Questions to be addressed in your report: \n• \nHow did you encapsulate (information hiding) your maze exploration? How does it interact \nwith your maze representation? • \nHow is your code design when assessed from a SOLID point of view? • \nHow will your code support new algorithms? • \nHow did iterative and incremental principles manifest in your project? • \nWhat was the typical timespan of an iteration?",
+    "percent": 87.71,
+    "page": 4,
+    "chapter": null
+  },
+  {
+    "chunk_id": 9,
+    "text": "McMaster University – Faculty of Engineering – Department of Computing and Software \nAssignment A1 (p. 5/5) \nGRADING SCHEME \nThis assignment is graded in three categories: (i) business logic, (ii) code, and (iii) product \ndevelopment. You can earn marks based on the quality of your work as follows. • \n100%-90% \no \nThe deliverable is of exceptional quality. E.g., the depth of reflection in the way the \ndimension is answered goes “above and beyond”, or the object orientation of the code \nis exceptional. • \n89%-80% \no \nGood quality deliverable. The code is readable and with good object orientation. Answers are neat and provide insightful comments that go beyond pure description. • \n79%-65% \n \no \nMedium-quality deliverable. The code is working, or the answer is only descriptive \nand does not demonstrate a clear understanding of the dimension. • \n64%-50% \n \no \n Poor quality deliverable. E.g., flaky code design, unreadable code, content-free \nanswer. • \n49%-0% \no \nNo deliverable (or shallow/superficial content), with no clear evidence of \nunderstanding for this dimension. Category \nDimension \nMarks \nBusiness logic \n(25%) \nPath Verification \n[0-10] \nPath Computation \n[0-15] \nCode (50%) \nSOLID principles \n[0-10] \nQuality of object-oriented design & identified abstractions \n[0-15] \nCode readability \n[0-10] \nQuality of answers w.r.t. to code-related questions \n[0-15] \nProduct \nDevelopment \n(25%) \nCommits generally linked to issues on GitHub \n[0-5] \nKanban board maintained \n[0-5] \nQuality of answers w.r.t. to product-related questions \n[0-15] \nPenalties \nDelivery failure (report) \n-50 \nDelivery failure (code) \n-50",
+    "percent": 100.0,
+    "page": 5,
+    "chapter": null
+  }
+]
