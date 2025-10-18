@@ -32,17 +32,6 @@ AI Reading Partner is a no-spoiler, AI-powered book discussion web app built wit
   - Response is generated using GPT-4 or GPT-3.5-turbo
   - Up to 5 relevant, spoiler-free chunks are included in the prompt
 
----
-
-## 💻 Installation
-
-```bash
-git clone git@github.com:SimardeepDhanda/aiReadingPartner.git
-cd aiReadingPartner
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-streamlit run app.py
 
 
 ### Model Selection
